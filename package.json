@@ -1,0 +1,27 @@
+{
+  "name": "npr-radio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "built/app.js",
+  "scripts": {
+    "build": "tsc --build",
+    "start": "node .",
+    "debug": "node --inspect-brk ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/stevenvergenz/npr-radio.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stevenvergenz/npr-radio/issues"
+  },
+  "homepage": "https://github.com/stevenvergenz/npr-radio#readme",
+  "dependencies": {
+    "@microsoft/mixed-reality-extension-sdk": "^0.15.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}
