@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/stevenvergenz/npr-radio#readme",
   "dependencies": {
-    "@microsoft/mixed-reality-extension-sdk": "^0.15.0"
+    "@microsoft/mixed-reality-extension-sdk": "./microsoft-mixed-reality-extension-sdk-0.15.0.tgz"
   },
   "devDependencies": {
     "typescript": "^3.8.3"
