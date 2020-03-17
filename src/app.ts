@@ -34,7 +34,8 @@ export default class NprRadio {
 			uri: `${this.baseUrl}/boombox.glb`,
 			colliderType: 'box',
 			actor: {
-				name: 'BoomboxBody'
+				name: 'BoomboxBody',
+				transform: { local: { rotation: MRE.Quaternion.FromEulerAngles(0, Math.PI, 0) } }
 			}
 		});
 
