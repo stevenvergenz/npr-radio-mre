@@ -43,7 +43,7 @@ export default class NprRadio {
 		this.wooferAnim = this.radioBody.animationsByName.get("boombox_woofer_Action");
 		this.wooferAnim.wrapMode = MRE.AnimationWrapMode.Loop;
 
-		const vidSettings: MRE.SetVideoStateOptions = { visible: false, paused: false, volume: 1.0 };
+		const vidSettings: MRE.SetVideoStateOptions = { visible: false, paused: false, volume: 0.8, spread: 0 };
 		this.radioBody.setBehavior(MRE.ButtonBehavior)
 			.onHover('enter', user => {
 				if (!/moderator/u.test(user.properties['altspacevr-roles'])) return;
