@@ -14,7 +14,6 @@ import { resolve } from 'path';
  */
 export default class NprRadio {
 	private assets: MRE.AssetContainer;
-	private trackInstance: MRE.MediaInstance = null;
 	private radioBody: MRE.Actor;
 	private wooferAnim: MRE.Animation;
 	private playObj: MRE.Actor;
