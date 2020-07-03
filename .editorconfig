@@ -1,0 +1,6 @@
+root = true
+
+[*.{ts,js}]
+indent_type = tab
+end_of_line = lf
+charset = utf-8

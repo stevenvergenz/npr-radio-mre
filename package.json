@@ -2,7 +2,7 @@
   "name": "npr-radio",
   "version": "1.0.0",
   "description": "",
-  "main": "built/app.js",
+  "main": "built/server.js",
   "scripts": {
     "build": "tsc --build",
     "start": "node .",
@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/stevenvergenz/npr-radio#readme",
   "dependencies": {
-    "@microsoft/mixed-reality-extension-sdk": "^0.15.0"
+    "@microsoft/mixed-reality-extension-sdk": "^0.15.0",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
+    "@types/node-fetch": "^2.5.7",
     "typescript": "^3.8.3"
   }
 }

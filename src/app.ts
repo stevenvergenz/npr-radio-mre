@@ -1,24 +1,13 @@
-/*!
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
- */
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
-import { resolve } from 'path';
-
-// https://17853.live.streamtheworld.com/KUOWFM_HIGH_MP3.mp3?dist=kuow
+import { getStream, search } from './channels';
 
 /** Global state, persists after session ends. */
 let playing = false;
 
-/**
- * A simple music player for Street Hoops World in Altspace.
- * Users can play/pause a looping track.
- * Author: Adrian Balanon Audio By: Megan Frazier
- */
 export default class NprRadio {
 	private kuow: MRE.VideoStream;
 	private radioBody: MRE.Actor;
-	private wooferAnim: MRE.Animation;
+	//private wooferAnim: MRE.Animation;
 	private playObj: MRE.Actor;
 	private vidSettings: MRE.SetVideoStateOptions = { visible: false, paused: false, volume: 0.8, spread: 0 };
 
@@ -29,9 +18,15 @@ export default class NprRadio {
 
 	// Once the context is "started", initialize the app.
 	private async started() {
+		const searchResults = await search("metal");
+		console.log(searchResults);
+		const firstStation = searchResults[0];
+		console.log(`Playing ${firstStation.text}`);
+		const firstStream = (await getStream(firstStation.URL))[0];
+		console.log(firstStream);
 		const assets = new MRE.AssetContainer(this.context);
-		this.kuow = assets.createVideoStream("KUOW", {
-			uri: 'https://17853.live.streamtheworld.com/KUOWFM_HIGH_MP3.mp3?dist=kuow'
+		this.kuow = assets.createVideoStream(firstStation.now_playing_id, {
+			uri: firstStream
 		});
 
 		this.radioBody = MRE.Actor.CreateFromGltf(assets, {
@@ -44,8 +39,9 @@ export default class NprRadio {
 		});
 
 		await this.radioBody.created();
-		this.wooferAnim = this.radioBody.animationsByName.get("boombox_woofer_Action");
-		this.wooferAnim.wrapMode = MRE.AnimationWrapMode.Loop;
+		console.log(this.radioBody.animationsByName.keys());
+		//this.wooferAnim = this.radioBody.animationsByName.get("boombox_woofer_Action");
+		//this.wooferAnim.wrapMode = MRE.AnimationWrapMode.Loop;
 
 		this.radioBody.setBehavior(MRE.ButtonBehavior)
 			.onHover('enter', user => {
@@ -72,18 +68,13 @@ export default class NprRadio {
 		if (on) {
 			this.playObj = MRE.Actor.Create(this.context, { actor: { name: "PlayObject" }});
 			this.playObj.startVideoStream(this.kuow.id, this.vidSettings);
-			this.wooferAnim.play();
+			//this.wooferAnim.play();
 			playing = true;
 		} else {
 			this.playObj.destroy();
 			this.playObj = null;
-			this.wooferAnim.stop();
+			//this.wooferAnim.stop();
 			playing = false;
 		}
 	}
 }
-
-const server = new MRE.WebHost({
-	baseDir: resolve(__dirname, '..', 'public')
-});
-server.adapter.onConnection(context => new NprRadio(context, server.baseUrl));
